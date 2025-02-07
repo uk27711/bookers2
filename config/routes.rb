@@ -1,8 +1,5 @@
+
 Rails.application.routes.draw do
-  get "lists/new"
-  get "lists/index"
-  get "lists/show"
-  get "lists/edit"
   devise_for :users
   root to: 'homes#top'
   get 'homes/about', to: 'homes#about', as: :about
