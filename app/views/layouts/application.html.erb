@@ -17,45 +17,38 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav ml-auto">
               <li>
-                <a class="nav-link text-light" href="/"><i class="fa-solid fa-home"></i> Home</a>
+                <%= link_to root_path,class:"btn btn-success btn-sm btn-block" do %>
+                  <i class="fa-solid fa-home"></i> Home
+                <% end %>
               </li>
               <li>
-                <a class="nav-link text-light" href="/home/about"><i class="fa-solid fa-link"></i> About</a>
+                <%= link_to about_path,class:"nav-link text-light" do %>
+                  <i class="fa-solid fa-link"></i> About
+                <% end %>
               </li>
               <li>
-                <a class="nav-link text-light" href="/users/sign_up"><i class="fa-solid fa-user-plus"></i> Sign up</a>
+                <%= link_to new_user_registration_path,class:"btn btn-success btn-sm btn-block sign_up" do %>
+                  <i class="fa-solid fa-user-plus"></i> Sign up
+                <% end %>
               </li>
               <li>
-                <a class="nav-link text-light" href="/users/sign_in"><i class="fa-solid fa-sign-in-alt"></i> Log in</a>
+                <%= link_to new_user_session_path,class:"nav-link text-light" do %>
+                  <i class="fa-solid fa-sign-in-alt"></i> Log in
+                <% end %>
               </li>
             </ul>
           </div>
         </div>
-    </nav>
-  </header>
+      </nav>
+      
+      </div>
+
+    </header>
 
   <main>
-  <p id="notice">Signed out successfully.</p>
-  <div class="container">
-    <div class="row">
-      <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
-            <h1>welcome to <i class="fa-solid fa-book"></i><strong>Bookers</strong>  !!</h1>
-            <p>In  <i class="fa-solid fa-book"></i><strong>Bookers</strong>, </p>
-            <p>you can share and exchange  your opinions , inpressions , and emotions</p>
-            <p> about various books!</p>
-            <div class="btn-wrapper col-10 mx-auto">
-            <div class="row">
-              <a class="btn btn-info btn-sm btn-block mb-3 sign_in" href="/users/sign_in">Log in</a>
-            </div>
-            <div class="row">
-              <a class="btn btn-success btn-sm btn-block sign_up" href="/users/sign_up">Sign up</a>
-            </div>
-            </div>
-      </div>
-    </div>
-  </div>
-
-    </main>
+  <p id="notice"><%= notice %></p>
+  <%= yield %>
+  </main>
     <footer>
       <div class='container mt-5'>
   	    <div class='row'>

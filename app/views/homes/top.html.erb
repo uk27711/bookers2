@@ -1,51 +1,21 @@
-<html>
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <script src="https://kit.fontawesome.com/b00ef6c67b.js" crossorigin="anonymous"></script>
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-
-
-  <body>
-    <header>
-      <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <div class="container">
-          <a class="navbar-brand" href="/"><span>Bookers</span></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
-            <ul class="navbar-nav ml-auto">
-              <li>
-                <a class="nav-link text-light" href="/"><i class="fa-solid fa-home"></i> Home</a>
-              </li>
-              <li>
-                <a class="nav-link text-light" href="/home/about"><i class="fa-solid fa-link"></i> About</a>
-              </li>
-              <li>
-                <a class="nav-link text-light" href="/users/sign_up"><i class="fa-solid fa-user-plus"></i> Sign up</a>
-              </li>
-              <li>
-                <a class="nav-link text-light" href="/users/sign_in"><i class="fa-solid fa-sign-in-alt"></i> Log in</a>
-              </li>
-            </ul>
+<div class="container">
+  <div class="row">
+    <div class='mx-auto col-11 col-sm-10 col-lg-8 col-xl-6'>
+        <h1>welcome to <i class="fa-solid fa-book"></i><strong>Bookers</strong>  !!</h1>
+        <p>In  <i class="fa-solid fa-book"></i><strong>Bookers</strong>, </p>
+        <p>you can share and exchange  your opinions , inpressions , and emotions</p>
+        <p> about various books!</p>
+        <div class="btn-wrapper col-10 mx-auto">
+          <div class="row">
+            <%= link_to "Log in", new_user_session_path,class:"btn btn-info btn-sm btn-block mb-3 sign_in" %>
           </div>
-        </div>
-    </nav>
-  </header>
+          <div class="row">
+            <%= link_to "Sign up", new_user_registration_path,class:"btn btn-success btn-sm btn-block sign_up"%>
+          </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
-    </main>
-    <footer>
-      <div class='container mt-5'>
-  	    <div class='row'>
-    	    <div class='mx-auto'>
-    		    <p>CopyRight Infratop.inc</p>
-    	    </div>
-        </div>
-     </div>
-    </footer>
-  </body>
-</html>
 
