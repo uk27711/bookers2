@@ -1,40 +1,40 @@
-class PostImagesController < ApplicationController
+class BooksController < ApplicationController
 
   def new
-    @post_image = PostImage.new
+    @new_book = Books.new
   end
 
   # 投稿データの保存
   def create
-    @post_image = PostImage.new(post_image_params)
-    @post_image.user_id = current_user.id
-    if @post_image.save
-      redirect_to post_images_path
+    @books = Books.new(books_params)
+    @books.user_id = current_user.id
+    if @books.save
+      redirect_to books_path
     else
       render :new
     end
   end
 
   def index
-    @post_images = PostImage.page(params[:page])
+    @books = Books.page(params[:page])
   end
 
   def show
-    @post_images = PostImage.find(params[:id])
-    @post_comment = PostComment.new
+    @books = Books.find(params[:id])
+    @books = Books.new
   end
 
   def destroy
-    post_image = PostImage.find(params[:id])
-    post_images.destroy
-    redirect_to post_images_path
+    books = Books.find(params[:id])
+    books.destroy
+    redirect_to books_path
   end
 
   # 投稿データのストロングパラメータ
   private
 
   def post_image_params
-    params.require(:post_image).permit(:shop_name, :image, :caption)
+    params.require(:books).permit(:shop_name, :image, :caption)
   end
 
 end
