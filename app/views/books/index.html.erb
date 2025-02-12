@@ -1,8 +1,5 @@
-<%= render 'list', books: @books %>
-
 <!-- ユーザーの詳細 -->
   <main>
-    <p id="notice">signed up successfully.</p>
     <div class='container px-5 px-sm-0'>
     <div class='row'>
     <div class='col-md-3'>
@@ -14,18 +11,21 @@
       <% end %>
       <table class='table'>
       <th>name</th>
-      <th>AAAAA</th>
+      <th></th>
     </tr>
   <tr>
 	  <th>introduction</th>
 	  <th></th>
   </tr>
 </table>
+<%= render 'users', books: @books %>
+<%= link_to 'Update User', edit_user_path(@user), class: 'btn btn-outline-secondary btn-block' %>
 
 <div class='row'>
-  <a class="btn btn-outline-secondary btn-block edit_user_203918" href="/users/203918/edit">
+  <a class="btn btn-outline-secondary btn-block edit_user_203918" href="/users/edit">
     <i class="fas fa-user-cog"></i>
-</a></div>
+  </a>
+</div>
       <h2 class="mt-3">New book</h2>
       
   <div class="form-group">
