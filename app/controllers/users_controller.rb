@@ -5,9 +5,16 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books.page(params[:page])
   end
+
+  def index
+    @user = current_user
+    @books = Book.page(params[:page])
+  end
   
   def edit
     @user = User.find(params[:id])
+    @books = Book.all
+    @books = Book.page(params[:page]).per(10)
   end
 
   def update

@@ -1,5 +1,5 @@
-<!-- ユーザーの詳細 -->
-Books index
+ User index
+ <!-- ユーザーの詳細 -->
 <html>
   <main>
         <div class='container px-5 px-sm-0'>
@@ -9,7 +9,7 @@ Books index
                 <% if @user.present? %>
                   <%= image_tag @user.get_profile_image(100,100) %>
                 <% else %>
-                  <%= image_tag "no_image.jpg" %> <no_image.jpg>
+                  <%= image_tag "default_profile_image.jpg" %> <no_image.jpg>
                 <% end %>
                     <table class='table'>
                       <tr>
@@ -46,8 +46,8 @@ Books index
                       <thead>
                         <tr>
                         <th></th>
-                        <th>Title</th>
-                        <th>Opinion</th>
+                        <th>image</th>
+                        <th>name</th>
                         <th colspan="3"></th>
                         </tr>
                       </thead>
@@ -56,3 +56,4 @@ Books index
         </div>
   </main>
 </html>
+

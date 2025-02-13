@@ -15,14 +15,28 @@ class BooksController < ApplicationController
     end
   end
 
+  def edit
+    @user = current_user
+    @books = Book.all
+    @book = Book.find_by(id: params[:id]) # find_by で検索してレコードがなければ nil を返す
+    if @book.nil?
+      flash[:alert] = "指定された本は存在しません"
+      redirect_to books_path # 本が見つからなかった場合、一覧ページにリダイレクト
+    end
+    @books = Book.page(params[:page]).per(10)
+    end
+  end
+
   def index
     @user = current_user
-    @books = Book.page(params[:page])
+    @book = Book.page(params[:page])
+    @books = Book.all
   end
 
   def show
-    @books = Books.find(params[:id])
-    @books = Books.new
+    @book_id = Books.find(params[:id])
+    @book = Books.new
+    @books = Book.all
   end
 
   def destroy
@@ -38,4 +52,3 @@ class BooksController < ApplicationController
     params.require(:books).permit(:shop_name, :image, :caption)
   end
 
-end
