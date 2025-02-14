@@ -6,14 +6,19 @@ class BooksController < ApplicationController
 
   # 投稿データの保存
   def create
-    @books = Books.new(books_params)
-    @books.user_id = current_user.id
-    if @books.save
+    @book = Book.new(books_params)
+    @book.user_id = current_user.id
+    if @book.save
       redirect_to books_path
     else
       render :new
     end
   end
+
+  def books_params
+    params.require(:book).permit(:title, :opinion) # Replace with actual book fields
+  end
+
 
   def edit
     @user = current_user
@@ -24,7 +29,6 @@ class BooksController < ApplicationController
       redirect_to books_path # 本が見つからなかった場合、一覧ページにリダイレクト
     end
     @books = Book.page(params[:page]).per(10)
-    end
   end
 
   def index
@@ -47,8 +51,8 @@ class BooksController < ApplicationController
 
   # 投稿データのストロングパラメータ
   private
-
+  
   def post_image_params
     params.require(:books).permit(:shop_name, :image, :caption)
   end
-
+end

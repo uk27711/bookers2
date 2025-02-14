@@ -9,7 +9,7 @@ Books index
                 <% if @user.present? %>
                   <%= image_tag @user.get_profile_image(100,100) %>
                 <% else %>
-                  <%= image_tag "no_image.jpg" %> <no_image.jpg>
+                  <%= image_tag "default_profile_image.jpg" %> <no_image.jpg>
                 <% end %>
                     <table class='table'>
                       <tr>
@@ -37,8 +37,15 @@ Books index
                   <textarea class="form-control book_body" name="book[body]" id="book_opinion"></textarea>
                 </div>
                 <div class="form-group">
-                  <input type="submit" name="commit" value="Create Book" class="btn btn-success" data-disable-with="Create Book" />
+                  <%= link_to user_path(current_user.id), class: 'btn btn-success' do %>
+                    Update User
+                  <% end %>
                 </div>
+
+
+                
+
+
           </div>
                   <div class='col-md-8 offset-md-1'>
                     <h2>Books</h2>
@@ -46,8 +53,8 @@ Books index
                       <thead>
                         <tr>
                         <th></th>
-                        <th>Title</th>
-                        <th>Opinion</th>
+                        <th>image</th>
+                        <th>name</th>
                         <th colspan="3"></th>
                         </tr>
                       </thead>
@@ -56,3 +63,4 @@ Books index
         </div>
   </main>
 </html>
+
