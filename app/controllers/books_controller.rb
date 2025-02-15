@@ -1,22 +1,22 @@
 class BooksController < ApplicationController
 
   def new
-    @new_book = Books.new
+    @book = Book.new
   end
 
   # 投稿データの保存
   def create
-    @book = Book.new(books_params)
+    @book = Book.new(book_params)
     @book.user_id = current_user.id
     if @book.save
-      redirect_to books_path
+      redirect_to @book, notice: 'Book was successfully created.'
     else
       render :new
     end
   end
 
-  def books_params
-    params.require(:book).permit(:title, :opinion) # Replace with actual book fields
+  def book_params
+    params.require(:book).permit(:title, :body) # Replace with actual book fields
   end
 
 
@@ -28,23 +28,23 @@ class BooksController < ApplicationController
       flash[:alert] = "指定された本は存在しません"
       redirect_to books_path # 本が見つからなかった場合、一覧ページにリダイレクト
     end
-    @books = Book.page(params[:page]).per(10)
+    @book = Book.page(params[:page]).per(10)
   end
 
   def index
     @user = current_user
-    @book = Book.page(params[:page])
     @books = Book.all
+    @book = Book.new
   end
 
   def show
-    @book_id = Books.find(params[:id])
-    @book = Books.new
+    @book_id = Book.find(params[:id])
+    @book = Book.new
     @books = Book.all
   end
 
   def destroy
-    books = Books.find(params[:id])
+    books = Book.find(params[:id])
     books.destroy
     redirect_to books_path
   end
@@ -52,7 +52,7 @@ class BooksController < ApplicationController
   # 投稿データのストロングパラメータ
   private
   
-  def post_image_params
-    params.require(:books).permit(:shop_name, :image, :caption)
+  def book_params
+    params.require(:book).permit(:body, :title)
   end
 end

@@ -5,10 +5,10 @@ class Book < ApplicationRecord
   has_many :post_comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
 
-  #shop_nameが存在しているかを確認するバリデーション
-  validates :shop_name, presence: true
-  #imageが存在しているかを確認するバリデーション
-  validates :image, presence: true
+  #titleが存在しているかを確認するバリデーション
+  validates :title, presence: true
+  #bodyが存在しているかを確認するバリデーション
+  validates :body, presence: true
 
 
   def get_image
