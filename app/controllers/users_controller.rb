@@ -4,11 +4,14 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @books = @user.books.page(params[:page])
+    @book_new = Book.new
+    @book = Book.find_by(id: params[:book_id])
   end
 
   def index
     @user = current_user
     @books = Book.page(params[:page])
+    @book = Book.new
   end
   
   def edit
@@ -17,14 +20,25 @@ class UsersController < ApplicationController
     @books = Book.page(params[:page]).per(10)
   end
 
+  def create
+    @book = current_user.books.build(book_params)
+    @book.user_id = current_user.id
+    @book = Book.new(book_params)
+    if @book.save
+      redirect_to book_path, notice: 'Book was successfully created.'
+    else
+      redirect_to user_path(current_user), alert: 'Failed to create the book.'
+    end
+  end
+
   def update
     @user = User.find(params[:id])
     if @user.update(user_params)
     redirect_to user_path(@user.id) 
-    else render :edit
+    else 
+      render :edit
     end
   end
-
 
   private
 

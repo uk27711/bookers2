@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :set_book, only: [:show, :edit, :update, :destroy]
 
   def new
     @book = Book.new
@@ -7,12 +8,22 @@ class BooksController < ApplicationController
 
   # 投稿データの保存
   def create
-    @book = Book.new(book_params)
+    @book = current_user.books.build(book_params)
     @book.user_id = current_user.id
+    @book = Book.new(book_params)
     if @book.save
-      redirect_to @book, notice: 'Book was successfully created.'
+      redirect_to book_path, notice: 'Book was successfully created.'
     else
-      render :new
+      redirect_to user_path(current_user), alert: 'Failed to create the book.'
+    end
+  end
+
+  def update
+    # 更新処理
+    if @book.update(book_params)
+      redirect_to @book, notice: 'Book was successfully updated.'
+    else
+      render :edit
     end
   end
 
@@ -40,19 +51,25 @@ class BooksController < ApplicationController
 
   def show
     @book_id = Book.find(params[:id])
-    @book = Book.new
     @books = Book.all
+    @book = Book.find(params[:id])
+    @book_new = Book.new  #本来はBook.newにしていた。
+    @user = @book.user #メンターが追記
   end
 
   def destroy
-    books = Book.find(params[:id])
-    books.destroy
-    redirect_to books_path
+    book = Book.find(params[:id])
+    book.destroy
+    redirect_to books_path, notice: 'Book was successfully deleted.'  # 削除後、indexにリダイレクト
   end
 
   # 投稿データのストロングパラメータ
   private
   
+  def set_book
+    @book = Book.find(params[:id])  # BookのIDを基に取得
+  end
+
   def book_params
     params.require(:book).permit(:body, :title)
   end

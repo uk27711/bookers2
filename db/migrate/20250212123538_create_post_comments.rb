@@ -5,7 +5,7 @@ class CreatePostComments < ActiveRecord::Migration[6.1]
       t.text :content
       belongs_to :user
       validates :content, presence: true
-
+      add_column :post_comments, :book_id, :integer
       t.timestamps
     end
   end
