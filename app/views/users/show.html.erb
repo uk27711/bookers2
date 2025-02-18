@@ -26,7 +26,7 @@ USER show
             <% end %>
           </div>
           <h2 class="mt-3">New book</h2>
-          <%= form_with(model: @book_new, local: true) do |f| %>
+          <%= form_with model: @book_new do |f| %>
             <div class="form-group">
               <label for="book_title">Title</label>
                 <%= f.text_field :title, class: "form-control" %>
@@ -43,7 +43,7 @@ USER show
       </div>
     </div>
 
-    <div class='col-md-8 offset-md-1'>
+    <div class='col-md-8 offset-md-4'>
     <h2>Books</h2>
     <table class='table table-hover table-inverse'>
       <thead>
@@ -60,8 +60,8 @@ USER show
         <!-- 投稿者の画像を表示 -->
         <td class="d-flex align-items-center justify-content-start">
           <%= image_tag @user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
-          <td><%= link_to book.title, book_path(book) %></td>
           </td>
+          <td><%= link_to book.title, book_path(book) %></td>
           <td><%= book.body %></td>
           <td colspan="3"></td>
         </tr>

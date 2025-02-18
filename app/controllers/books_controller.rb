@@ -3,13 +3,13 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new
+    @book_new = Book.new
     @user = current_user
   end
 
   # 投稿データの保存
   def create
-    @book = current_user.books.build(book_params)
-    @book.user_id = current_user.id
+    @book_new = Book.new
     @book = Book.new(book_params)
     if @book.save
       redirect_to book_path, notice: 'Book was successfully created.'
@@ -21,16 +21,11 @@ class BooksController < ApplicationController
   def update
     # 更新処理
     if @book.update(book_params)
-      redirect_to @book, notice: 'Book was successfully updated.'
+      redirect_to book_path, notice: 'Book was successfully updated.'
     else
       render :edit
     end
   end
-
-  def book_params
-    params.require(:book).permit(:title, :body) # Replace with actual book fields
-  end
-
 
   def edit
     @user = current_user
@@ -47,6 +42,7 @@ class BooksController < ApplicationController
     @user = current_user
     @books = Book.all
     @book = Book.new
+    @book_new = Book.new
   end
 
   def show
@@ -65,12 +61,8 @@ class BooksController < ApplicationController
 
   # 投稿データのストロングパラメータ
   private
-  
-  def set_book
-    @book = Book.find(params[:id])  # BookのIDを基に取得
-  end
 
   def book_params
-    params.require(:book).permit(:body, :title)
+    params.require(:book).permit(:title, :body)
   end
 end

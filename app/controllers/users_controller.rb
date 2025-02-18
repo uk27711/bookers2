@@ -1,28 +1,14 @@
 class UsersController < ApplicationController
   before_action :is_matching_login_user, only: [:edit, :update]
 
-  def show
-    @user = User.find(params[:id])
-    @books = @user.books.page(params[:page])
-    @book_new = Book.new
-    @book = Book.find_by(id: params[:book_id])
-  end
-
-  def index
-    @user = current_user
-    @books = Book.page(params[:page])
+  def new
     @book = Book.new
-  end
-  
-  def edit
-    @user = User.find(params[:id])
-    @books = Book.all
-    @books = Book.page(params[:page]).per(10)
+    @book_new = Book.new
+    @user = current_user
   end
 
   def create
-    @book = current_user.books.build(book_params)
-    @book.user_id = current_user.id
+    @book_new = Book.new
     @book = Book.new(book_params)
     if @book.save
       redirect_to book_path, notice: 'Book was successfully created.'
@@ -40,6 +26,25 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    @user = User.find(params[:id])
+    @books = Book.all
+    @books = Book.page(params[:page]).per(10)
+  end
+
+  def index
+    @user = current_user
+    @books = Book.page(params[:page])
+    @book_new = Book.new
+  end
+
+  def show
+    @user = User.find(params[:id])
+    @books = @user.books
+    @book_new = Book.new
+    @book = Book.find_by(id: params[:book_id])
+  end
+
   private
 
   def user_params
@@ -52,5 +57,4 @@ class UsersController < ApplicationController
       redirect_to post_images_path
     end
   end
-
 end
