@@ -12,7 +12,7 @@ class BooksController < ApplicationController
     @book_new = Book.new
     @book = Book.new(book_params)
     if @book.save
-      redirect_to book_path, notice: 'Book was successfully created.'
+      redirect_to edit_book_path(@book), notice: 'Book was successfully created.'
     else
       redirect_to user_path(current_user), alert: 'Failed to create the book.'
     end
@@ -30,7 +30,7 @@ class BooksController < ApplicationController
   def edit
     @user = current_user
     @books = Book.all
-    @book = Book.find_by(id: params[:id]) # find_by で検索してレコードがなければ nil を返す
+    @book = Book.find(params[:id]) # find_by で検索してレコードがなければ nil を返す
     if @book.nil?
       flash[:alert] = "指定された本は存在しません"
       redirect_to books_path # 本が見つからなかった場合、一覧ページにリダイレクト

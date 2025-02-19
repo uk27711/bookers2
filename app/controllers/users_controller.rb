@@ -34,7 +34,7 @@ class UsersController < ApplicationController
 
   def index
     @user = current_user
-    @books = Book.page(params[:page])
+    @books = Book.all
     @book_new = Book.new
   end
 
