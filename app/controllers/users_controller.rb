@@ -8,12 +8,11 @@ class UsersController < ApplicationController
   end
 
   def create
-    @book_new = Book.new
-    @book = Book.new(book_params)
-    if @book.save
-      redirect_to book_path, notice: 'Book was successfully created.'
+    @book_new = Book.new(book_params)
+    if @book_new.save
+      redirect_to book_path(@book_new), notice: 'Book was successfully created.'
     else
-      redirect_to user_path(current_user), alert: 'Failed to create the book.'
+      render :show, alert: 'Failed to create the book.'
     end
   end
 

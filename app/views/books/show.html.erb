@@ -1,8 +1,9 @@
 Books show
 <main>
+  <%= render 'book', user: current_user, book_new: @book %>
           <div class="col-md-8 offset-md-4">
             <h2>Book detail</h2>
-            <%= form_with model: @book do |f| %>
+            <%= form_with model: @book_new do |f| %>
               <table class="table">
                 <tbody>
                   <tr>
@@ -23,13 +24,13 @@ Books show
                     <%= f.text_area :body, class: "form-control form-control border-0" %>
                   </td>
                   <!-- 編集ボタン -->
-                  <% if @book.id.present? %>
+                  <% if @book.present? %>
                     <td>
                       <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %>
                     </td>
                   <% end %>
                   <!-- 削除ボタン -->
-                  <% if @book.id.present? %>
+                  <% if @book.present? %>
                     <td>
                       <%= link_to 'Destroy', @book, method: :delete, data: { confirm: "本当に消しますか？" }, class: "btn btn-sm btn-danger" %>
                     </td>
@@ -39,4 +40,4 @@ Books show
             </table>
           <% end %>
         </div>
-      </main>
+</main>

@@ -9,12 +9,11 @@ class BooksController < ApplicationController
 
   # 投稿データの保存
   def create
-    @book_new = Book.new
-    @book = Book.new(book_params)
-    if @book.save
-      redirect_to edit_book_path(@book), notice: 'Book was successfully created.'
+    @book_new = Book.new(book_params)
+    if @book_new.save
+      redirect_to book_path(@book_new), notice: 'Book was successfully created.'
     else
-      redirect_to user_path(current_user), alert: 'Failed to create the book.'
+      render :show, alert: 'Failed to create the book.'
     end
   end
 
@@ -35,21 +34,18 @@ class BooksController < ApplicationController
       flash[:alert] = "指定された本は存在しません"
       redirect_to books_path # 本が見つからなかった場合、一覧ページにリダイレクト
     end
-    @book = Book.page(params[:page]).per(10)
   end
 
   def index
     @user = current_user
     @books = Book.all
     @book = Book.new
-    @book_new = Book.new
   end
 
   def show
-    @book_id = Book.find(params[:id])
     @books = Book.all
-    @book = Book.find(params[:id])
-    @book_new = Book.new  #本来はBook.newにしていた。
+    @book = Book.find(params[:id])  # 既存の本を表示
+    @book_new = Book.new  #本来はBook.newにしていた。# 新しい本のインスタンスを作成
     @user = @book.user #メンターが追記
   end
 
