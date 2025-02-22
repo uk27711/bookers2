@@ -6,10 +6,11 @@ class User < ApplicationRecord
 
 
   has_one_attached :profile_image
-  has_many :favorites, dependent: :destroy
+  #has_many :favorites, dependent: :destroy
+  has_many :books, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
- 
+
 
 
 

@@ -12,6 +12,7 @@ Books show
                         <%= image_tag @user.get_profile_image(50, 50), class: "rounded-circle mr-3" %>
                       <% else %>
                         <%= image_tag "no_image.jpg", class: "rounded-circle mr-3" %> <!-- 代わりの画像を表示 -->
+                        #<%= link_to @user.name book_path(@book), class="text-center mb-0" %>???ユーザーネームを表示させたい。
                       <% end %>
                     </td>
                   <!-- タイトル -->
@@ -27,7 +28,7 @@ Books show
                   <!-- 削除ボタン -->
                   <% if @book.present? && @book.user == current_user %>
                     <td>
-                      <%= link_to 'Destroy', @book, method: :delete, data: { confirm: "本当に消しますか？" }, class: "btn btn-sm btn-danger" %>
+                      <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: "本当に消しますか？" }, class: "btn btn-sm btn-danger" %>
                     </td>
                   <% end %>
                 </tr>
