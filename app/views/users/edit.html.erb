@@ -4,19 +4,34 @@ uses edit
         <div class="row">
         <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
     <h2>User info</h2>
+    <%= form_with model: @user do |f| %>
       <div class="form-group">
-        <label for="user_name">Name</label>
-        <input class="form-control name" type="text" value="AAAAA" name="user[name]" id="user_name">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: 'form-control' %>
       </div>
+    
       <div class="form-group">
-        <label for="user_image">Image</label>
-        <input class="form-control-file user_image" accept="image/*" type="file" name="user[profile_image]" id="user_profile_image">
+        <%= f.label :introduction %>
+        <%= f.text_area :introduction, class: 'form-control' %>
       </div>
-      <div class="form-group">
-        <label for="user_introduction">Introduction</label>
-        <textarea class="form-control introduction" name="user[introduction]" id="user_introduction"></textarea>
+    
+      <%= f.submit 'Update User', class: 'btn btn-secondary' %>
+    <% end %>
+    
+        <% if @user.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+            <ul>
+              <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
       </div>
-      <div class="form-group">
-      <%= link_to 'Update User', user_path(current_user.id), class: 'btn btn-secondary' %>
     </div>
+  </div>
 </main>
+
+

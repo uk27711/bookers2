@@ -12,11 +12,10 @@ Books show
                         <%= image_tag @user.get_profile_image(50, 50), class: "rounded-circle mr-3" %>
                       <% else %>
                         <%= image_tag "no_image.jpg", class: "rounded-circle mr-3" %> <!-- 代わりの画像を表示 -->
-                        #<%= link_to @user.name book_path(@book), class="text-center mb-0" %>???ユーザーネームを表示させたい。
                       <% end %>
                     </td>
                   <!-- タイトル -->
-                  <td><%= @book.title %></td>
+                  <td><%= link_to @book.title, book_path(@book) %></td>
                   <!-- オピニオン (内容) -->
                   <td><%= @book.body %></td>
                   <!-- 編集ボタン -->
