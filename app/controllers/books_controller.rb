@@ -7,12 +7,14 @@ class BooksController < ApplicationController
 
   # 投稿データの保存
   def create
-    @book_new = Book.new(book_params)
-    @book_new.user_id = current_user.id
-    if @book_new.save
-      redirect_to book_path(@book_new), notice: 'Book was successfully created.'
+    @book = Book.new(book_params)
+    @book.user_id = current_user.id
+    if @book.save
+      redirect_to book_path(@book), notice: 'Book was successfully created.'
     else
-      render :show, alert: 'Failed to create the book.'
+     @user = current_user
+     @books = Book.all
+      render :index, alert: 'Failed to create the book.'
     end
   end
 
