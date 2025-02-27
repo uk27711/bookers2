@@ -7,7 +7,7 @@ class Book < ApplicationRecord
   #titleが存在しているかを確認するバリデーション
   validates :title, presence: true
   #bodyが存在しているかを確認するバリデーション
-  validates :body, presence: true
+  validates :body, presence: true, length: { maximum: 200 }
 
 
   def get_image

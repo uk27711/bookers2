@@ -1,43 +1,47 @@
 Books show
-<main>
-  <%= render 'book', user: current_user, book_new: @book_new, book:@book %>
-          <div class="col-md-8 offset-md-4">
-            <h2>Book detail</h2>
-            <table class='table table-hover table-inverse'>
-              <% @books.each do |book| %>
-                <tbody>
-                  <tr>
-                    <!-- 投稿者の画像 -->
-                    <td class="d-flex align-items-center">
-                    <%= link_to user_path(@user.id) do%>
-                      <% if @user && @user.get_profile_image(50, 50) %>
-                        <%= image_tag @user.get_profile_image(50, 50), class: "rounded-circle mr-3" %>
-                      <% else %>
-                        <%= image_tag "no_image.jpg", class: "rounded-circle mr-3" %> <!-- 代わりの画像を表示 -->
-                      <% end %>
-                      <br>
-                      <%= @user.name %>
-                      <% end %>
-                    </td>
-                    <!-- タイトル -->
-                    <td><%= link_to book.title, book_path(book) %></td>
-                    <!-- オピニオン (内容) -->
-                    <td><%= book.body %></td>
-                    <!-- 編集ボタン -->
-                    <% if @book.present? && @book.user == current_user %>
-                      <td>
-                        <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %>
-                      </td>
-                    <% end %>
-                    <!-- 削除ボタン -->
-                    <% if @book.present? && @book.user == current_user %>
-                      <td>
-                        <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: "本当に消しますか？" }, class: "btn btn-sm btn-danger" %>
-                      </td>
-                    <% end %>
+<div class="container">
+  <div class="row">
+    <div class='col-md-3'>
+      <%= render 'book', user: current_user, book_new: @book_new, book:@book %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class='table table-hover table-inverse'>
+        <% @books.each do |book| %>
+          <tbody>
+            <tr>
+              <!-- 投稿者の画像 -->
+              <td class="d-flex align-items-center">
+                <%= link_to user_path(book.user) do%>
+                  <% if @user && @user.get_profile_image(50, 50) %>
+                    <%= image_tag @user.get_profile_image(50, 50), class: "rounded-circle mr-3" %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", class: "rounded-circle mr-3" %> <!-- 代わりの画像を表示 -->
                   <% end %>
-                </tr>
-              </tbody>
-            </table>
-        </div>
-</main>
+                  <br>
+                  <%= book.user.name %>
+                <% end %>
+              </td>
+              <!-- タイトル -->
+              <td><%= link_to book.title, book_path(book) %></td>
+              <!-- オピニオン (内容) -->
+              <td><%= book.body %></td>
+              <!-- 編集ボタン -->
+              <% if @book.present? && @book.user == current_user %>
+                <td>
+                  <%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success" %>
+                </td>
+              <% end %>
+              <!-- 削除ボタン -->
+              <% if @book.present? && @book.user == current_user %>
+                <td>
+                  <%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: "本当に消しますか？" }, class: "btn btn-sm btn-danger" %>
+                </td>
+              <% end %>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

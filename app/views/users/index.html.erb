@@ -1,29 +1,35 @@
  User index
-<html>
-  <main>
-  <%= render 'books/book', user: current_user, book_new: @book_new, book:@book_new %>
-                  <div class='col-md-8 offset-md-4'>
-                    <h2>Users</h2>
-                    <table class='table' >
-                          <th>image</th>
-                          <th>name</th>
-                      <tbody>
-                        <% @books.each do |book| %>
-                        <!-- 投稿者の画像を表示 -->
-                        <td class="d-flex align-items-center justify-content-start">
-                          <%= image_tag @user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
-                          <%= @user.name %>
-                        </td>
-
-                          <!-- 詳細ページへのリンク -->
-                          <td>
-                            <%= link_to 'Show', user_path(@user), class: "btn-outline-info out" %>
-                          </td>
-                      </tbody>
-                      <% end %>
-                    </table>
-                  </div>
-                  </div>
-                  </div>
-                  </main>
-              </html>
+<div class="container">
+  <div class="row">
+    <div class='col-md-3'>
+      <%= render 'books/book', user: current_user, book_new: @book_new, book:@book_new %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+      <h2>Users</h2>
+      <table class='table table-hover table-inverse' >
+        <thead>
+          <tr>
+            <th>image</th>
+            <th>name</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <% @books.each do |book| %>
+          <tbody>
+            <tr>
+              <!-- 投稿者の画像を表示 -->
+              <td class="d-flex align-items-center justify-content-start">
+                <%= image_tag book.user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
+                <%= book.user.name %>
+              </td>
+              <!-- 詳細ページへのリンク -->
+              <td>
+                <%= link_to 'Show', user_path(book.user.id), class: "btn-outline-info out" %>
+              </td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

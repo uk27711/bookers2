@@ -1,33 +1,34 @@
 USER show
-<main>
-<%= render 'books/book', user: current_user, book_new: @book_new, book:@book_new %>
-    <div class='col-md-8 offset-md-4'>
-    <h2>Books</h2>
-    <table class='table table-hover table-inverse'>
-      <thead>
-        <tr>
-          <th></th>
-          <th>Title</th>
-          <th>Opinion</th>
-          <th colspan="3"></th>
-        </tr>
-      </thead>
-      <% @books.each do |book| %>
-        <tbody>
-        <tr>
-        <!-- 投稿者の画像を表示 -->
-        <td class="d-flex align-items-center justify-content-start">
-          <%= image_tag @user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
-          </td>
-          <td><%= link_to book.title, book_path(book) %></td>
-          <td><%= book.body %></td>
-          <td colspan="3"></td>
-        </tr>
-        </tbody>
-      <% end %>
-    </table>
+<div class="container">
+  <div class="row">
+    <div class='col-md-3'>
+      <%= render 'books/book', user: current_user, book_new: @book_new, book:@book_new %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+      <h2>Books</h2>
+      <table class='table table-hover table-inverse'>
+        <thead>
+          <tr>
+            <th></th>
+            <th>Title</th>
+            <th>Opinion</th>
+            <th colspan="3"></th>
+          </tr>
+        </thead>
+        <% @books.each do |book| %>
+          <tbody>
+            <tr>
+              <!-- 投稿者の画像を表示 -->
+              <td class="d-flex align-items-center justify-content-start">
+                <%= image_tag @user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
+              </td>
+              <td><%= link_to book.title, book_path(book) %></td>
+              <td><%= book.body %></td>
+              <td colspan="3"></td>
+            </tr>
+          </tbody>
+        <% end %>
+      </table>
+    </div>
   </div>
-  </div>
-  </div>
-  </main>
-</html>
+</div>
