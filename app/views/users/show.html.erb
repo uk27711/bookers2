@@ -2,7 +2,7 @@ USER show
 <div class="container">
   <div class="row">
     <div class='col-md-3'>
-      <%= render 'books/book', user: current_user, book_new: @book_new, book:@book_new %>
+      <%= render 'books/book', user: @user, book_new: @book_new, book: @book_new %>
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
