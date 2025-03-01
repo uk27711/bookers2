@@ -2,7 +2,7 @@ books index
 <div class="container">
   <div class="row">
     <div class='col-md-3'>
-      <%= render 'book', user: book.user, book_new: @book_new, book: @books %>
+      <%= render 'book', user: current_user, book_new: @book_new %>
     </div>
     <div class='col-md-8 offset-md-1'>
       <h2>Books</h2>
@@ -23,7 +23,7 @@ books index
                 <%= image_tag @user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
               </td>
               <!-- タイトルを表示 -->
-              <td><%= link_to book.title, book_path(book.user) %></td>
+              <td><%= link_to book.title, book_path(book) %></td>
               <!-- 本の内容を表示 -->
               <td><%= book.body %></td>
               <td colspan="3"></td>
