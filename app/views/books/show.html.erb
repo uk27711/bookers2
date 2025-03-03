@@ -13,8 +13,8 @@ Books show
               <!-- 投稿者の画像 -->
               <td class="d-flex align-items-center">
                 <%= link_to user_path(@book.user) do%>
-                  <% if @user && @user.get_profile_image(50, 50) %>
-                    <%= image_tag @user.get_profile_image(50, 50), class: "rounded-circle mr-3" %>
+                  <% if @book.user && @book.user.get_profile_image(50, 50) %>
+                    <%= image_tag @book.user.get_profile_image(50, 50), class: "rounded-circle mr-3" %>
                   <% else %>
                     <%= image_tag "no_image.jpg", size: "50x50", class: "rounded-circle mr-3" %> <!-- 代わりの画像を表示 -->
                   <% end %>

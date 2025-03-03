@@ -20,7 +20,7 @@ books index
             <tr>
               <!-- 投稿者の画像を表示 -->
               <td class="d-flex align-items-center justify-content-start">
-                <%= image_tag @user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
+                <%= image_tag book.user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
               </td>
               <!-- タイトルを表示 -->
               <td><%= link_to book.title, book_path(book) %></td>
