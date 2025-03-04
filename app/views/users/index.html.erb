@@ -11,15 +11,20 @@
           <tr>
             <th>image</th>
             <th>name</th>
+            <th colspan="3"></th>
           </tr>
         </thead>
         <% @books.each do |book| %>
           <tbody>
             <tr>
               <!-- 投稿者の画像を表示 -->
-              <td class="d-flex align-items-center justify-content-between">
+              <td class="">
                 <%= image_tag book.user.get_profile_image(80,80), class: "rounded-circle mr-2" %>
+              </td>
+              <td>
                 <%= book.user.name %>
+              </td>
+              <td>
                 <%= link_to 'Show', user_path(book.user.id), class: "btn-outline-info out" %>
               </td>
             </tr>

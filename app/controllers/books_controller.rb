@@ -1,4 +1,5 @@
 class BooksController < ApplicationController
+  before_action :authenticate_user!
 
   def new
     @book_new = Book.new
@@ -39,7 +40,7 @@ class BooksController < ApplicationController
       @book_new = @book
     else
       flash[:alert] = "編集権限がありません"
-      redirect_to book_path
+      redirect_to books_path
     end
   end
 
